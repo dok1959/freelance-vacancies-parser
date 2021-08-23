@@ -1,2 +1,2 @@
 # freelance-parser-bot
-ASP.NET CORE telegram bot for parsing freelance vacancies
+ASP.NET CORE telegram bot for parsing freelance vacancies on https://freelance.ru/
