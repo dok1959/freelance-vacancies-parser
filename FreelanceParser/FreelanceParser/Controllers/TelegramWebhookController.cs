@@ -1,12 +1,9 @@
 ﻿using FreelanceParser.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
 namespace FreelanceParser.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class TelegramWebhookController : ControllerBase
     {
         private TelegramUpdateHandlerService _updateHandlerService;
@@ -16,12 +13,12 @@ namespace FreelanceParser.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Update update)
+        public IActionResult Post([FromBody] Update update)
         {
             if (update == null)
                 return BadRequest();
 
-            await _updateHandlerService.HandleAsync(update);
+            _updateHandlerService.HandleAsync(update);
 
             return Ok();
         }
