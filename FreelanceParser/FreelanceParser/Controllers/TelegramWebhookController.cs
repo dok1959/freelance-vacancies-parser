@@ -6,19 +6,13 @@ namespace FreelanceParser.Controllers
 {
     public class TelegramWebhookController : ControllerBase
     {
-        private TelegramUpdateHandlerService _updateHandlerService;
-        public TelegramWebhookController(TelegramUpdateHandlerService updateHandlerService)
-        {
-            _updateHandlerService = updateHandlerService;
-        }
-
         [HttpPost]
-        public IActionResult Post([FromBody] Update update)
+        public IActionResult Post([FromServices] TelegramUpdateHandlerService updateHandlerService,[FromBody] Update update)
         {
             if (update == null)
                 return BadRequest();
 
-            _updateHandlerService.HandleAsync(update);
+            updateHandlerService.Handle(update);
 
             return Ok();
         }

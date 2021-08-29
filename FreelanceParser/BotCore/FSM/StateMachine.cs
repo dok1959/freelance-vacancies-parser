@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace FreelanceParser.FSM
+namespace BotCore.FSM
 {
     public abstract class StateMachine<T, U, K> where T : IState<K> 
     {

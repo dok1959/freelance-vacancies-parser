@@ -1,9 +1,9 @@
-﻿using FreelanceParser.FSM;
+﻿using BotCore.FSM;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace FreelanceParser.TelegramBotFSM
+namespace FreelanceParser.TelegramBot.FSM.States
 {
     public abstract class BaseState : IState<Update>
     {

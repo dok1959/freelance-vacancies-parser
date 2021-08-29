@@ -1,4 +1,4 @@
-﻿using FreelanceParser.TelegramBotFSM;
+﻿using FreelanceParser.TelegramBot.FSM;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -15,7 +15,7 @@ namespace FreelanceParser.Services
             _stateMachine = stateMachine;
         }
 
-        public void HandleAsync(Update data)
+        public void Handle(Update data)
         {
             if(!_stateMachine.IsInitialized)
                 _stateMachine.Initialize(_client, data);

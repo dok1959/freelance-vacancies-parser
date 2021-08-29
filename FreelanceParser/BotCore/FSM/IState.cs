@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace FreelanceParser.FSM
+namespace BotCore.FSM
 {
     public interface IState<T>
     {

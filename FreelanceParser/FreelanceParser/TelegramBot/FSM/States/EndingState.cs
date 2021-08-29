@@ -2,19 +2,19 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace FreelanceParser.TelegramBotFSM.States
+namespace FreelanceParser.TelegramBot.FSM.States
 {
-    public class Ending : BaseState
+    public class EndingState : BaseState
     {
-        public Ending(TelegramStateMachine stateMachine, ITelegramBotClient client, Update data) 
-            : base(nameof(Ending), stateMachine, client, data) { }
+        public EndingState(TelegramStateMachine stateMachine, ITelegramBotClient client, Update data) 
+            : base(nameof(EndingState), stateMachine, client, data) { }
 
         public async override Task Enter() => await _client.SendTextMessageAsync(_data.Message.Chat.Id, "GoodBye");
 
         public async override Task Update(Update data)
         {
             _data = data;
-            await _stateMachine.SetCurrentState(new Greeting(_stateMachine, _client, _data));
+            await _stateMachine.SetCurrentState(new GreetingState(_stateMachine, _client, _data));
         }
 
         public override Task Exit() => Task.CompletedTask;

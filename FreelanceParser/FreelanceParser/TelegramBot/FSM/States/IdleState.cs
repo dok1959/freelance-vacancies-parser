@@ -2,19 +2,18 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace FreelanceParser.TelegramBotFSM.States
+namespace FreelanceParser.TelegramBot.FSM.States
 {
-    public class Start : BaseState
+    public class IdleState : BaseState
     {
-        public Start(TelegramStateMachine stateMachine, ITelegramBotClient client, Update data)
-            : base(nameof(Start), stateMachine, client, data) { }
+        public IdleState(TelegramStateMachine stateMachine, ITelegramBotClient client, Update data)
+            : base(nameof(EndingState), stateMachine, client, data) { }
 
         public override Task Enter() => Task.CompletedTask;
 
         public override Task Update(Update data)
         {
             _data = data;
-            _stateMachine.SetCurrentState(new Greeting(_stateMachine, _client, _data));
             return Task.CompletedTask;
         }
 

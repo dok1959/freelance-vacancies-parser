@@ -1,5 +1,8 @@
+using FreelanceParser.Services;
+using FreelanceParser.TelegramBot.FSM;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
@@ -9,22 +12,23 @@ namespace FreelanceParser
     public class Startup
     {
         private BotConfiguration _botConfiguration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _botConfiguration = configuration.GetSection("BotConfiguration").Get<BotConfiguration>();
+        }
         public void ConfigureServices(IServiceCollection services)
         {
-            _botConfiguration = new BotConfiguration
-            {
-                Token = "",
-                HostAddress = ""
-            };
+            services.AddHostedService<TelegramConfigureWebhookService>();
 
-            ITelegramBotClient botClient = new TelegramBotClient(_botConfiguration.Token);
+            services.AddHttpClient("tgwebhook")
+                    .AddTypedClient<ITelegramBotClient>(httpClient
+                        => new TelegramBotClient(_botConfiguration.Token, httpClient));
 
-            string hook = $"{_botConfiguration.HostAddress}/bot/{_botConfiguration.Token}";
-            botClient.SetWebhookAsync(hook).Wait();
+            services.AddScoped<TelegramUpdateHandlerService>();
+            services.AddSingleton<TelegramStateMachine>();
 
-            services.AddScoped(client => botClient);
-
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,7 +50,6 @@ namespace FreelanceParser
                     pattern: $"bot/{_botConfiguration.Token}",
                     new { controller = "TelegramWebhook", action = "Post" }
                 );
-                endpoints.MapControllers();
             });
         }
     }
