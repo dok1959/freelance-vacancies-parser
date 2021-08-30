@@ -25,6 +25,8 @@ namespace FreelanceParser.TelegramBot.FSM
 
         public override Task Update(Update data)
         {
+            if (data.Message == null)
+                return Task.CompletedTask;
             switch(data.Message.Text)
             {
                 case "/start": return SetCurrentState(new GreetingState(this, _client, data));

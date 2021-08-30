@@ -7,7 +7,7 @@ namespace FreelanceParser.TelegramBot.FSM.States
     public class EndingState : BaseState
     {
         public EndingState(TelegramStateMachine stateMachine, ITelegramBotClient client, Update data) 
-            : base(nameof(EndingState), stateMachine, client, data) { }
+            : base(stateMachine, client, data) { }
 
         public async override Task Enter() => await _client.SendTextMessageAsync(_data.Message.Chat.Id, "GoodBye");
 
@@ -16,7 +16,5 @@ namespace FreelanceParser.TelegramBot.FSM.States
             _data = data;
             await _stateMachine.SetCurrentState(new GreetingState(_stateMachine, _client, _data));
         }
-
-        public override Task Exit() => Task.CompletedTask;
     }
 }
