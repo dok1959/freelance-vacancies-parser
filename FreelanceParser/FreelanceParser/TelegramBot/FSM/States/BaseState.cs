@@ -1,4 +1,4 @@
-﻿using BotCore.FSM;
+﻿using Bot.Core.FSM;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;

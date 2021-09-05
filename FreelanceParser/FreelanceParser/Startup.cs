@@ -1,4 +1,5 @@
 using FreelanceParser.Services;
+using FreelanceParser.Services.Parser;
 using FreelanceParser.TelegramBot.FSM;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace FreelanceParser
 
             services.AddScoped<TelegramUpdateHandlerService>();
             services.AddSingleton<TelegramStateMachine>();
+            services.AddTransient<IVacanciesParser, VacanciesParser>();
 
             services.AddControllers().AddNewtonsoftJson();
         }

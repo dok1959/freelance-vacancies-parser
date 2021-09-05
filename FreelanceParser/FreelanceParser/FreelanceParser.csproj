@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.16.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.9" />
     <PackageReference Include="Telegram.Bot" Version="16.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BotCore\BotCore.csproj" />
+    <ProjectReference Include="..\Bot.Core\Bot.Core.csproj" />
   </ItemGroup>
 
 </Project>

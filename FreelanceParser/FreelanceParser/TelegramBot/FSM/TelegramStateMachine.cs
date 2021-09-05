@@ -1,4 +1,4 @@
-﻿using BotCore.FSM;
+﻿using Bot.Core.FSM;
 using FreelanceParser.TelegramBot.FSM.States;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -31,6 +31,7 @@ namespace FreelanceParser.TelegramBot.FSM
             {
                 case "/start": return SetCurrentState(new GreetingState(this, _client, data));
                 case "/stop": return SetCurrentState(new IdleState(this, _client, data));
+                case "/parse": return SetCurrentState(new ParsingVacanciesState(this, _client, data));
             }
             return _currentState.Update(data);
         }

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BotCore.Commands
+namespace Bot.Core.Commands
 {
     public interface ICommand<T, K>
     {

@@ -1,4 +1,5 @@
 ﻿using FreelanceParser.TelegramBot.FSM;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -15,12 +16,12 @@ namespace FreelanceParser.Services
             _stateMachine = stateMachine;
         }
 
-        public void Handle(Update data)
+        public async Task Handle(Update data)
         {
             if(!_stateMachine.IsInitialized)
                 _stateMachine.Initialize(_client, data);
 
-            _stateMachine.Update(data);
+            await _stateMachine.Update(data);
         }
 
     }

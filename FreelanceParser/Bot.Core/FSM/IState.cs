@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BotCore.FSM
+namespace Bot.Core.FSM
 {
     public interface IState<T>
     {
